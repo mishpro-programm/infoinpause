@@ -7,8 +7,8 @@ class $modify(MyPauseLayer, PauseLayer) {
 	void customSetup(){
 		PauseLayer::customSetup();
 		auto menu = this->getChildByID("right-button-menu");
-		auto sprite = CCSprite::createWithSpriteFrameName("GJ_infoBtn_001.png");
-		sprite->setScale(0.675f);
+		auto sprite = CCSprite::createWithSpriteFrameName("GJ_chatBtn_001.png");
+		sprite->setScale(0.65f);
 		//auto sprite = ButtonSprite::create("Info");
 		auto btn = CCMenuItemSpriteExtra::create(sprite, this, menu_selector(MyPauseLayer::onLevelInfo));
 		menu->setLayout(ColumnLayout::create()->setAxisAlignment(AxisAlignment::End));
