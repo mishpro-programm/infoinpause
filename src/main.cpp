@@ -26,8 +26,8 @@ class $modify(MyPauseLayer, PauseLayer) {
 		auto level = playLayer->m_level;
 		auto infoLayer = InfoLayer::create(level, nullptr, nullptr);
 		infoLayer->setZOrder(11);
-		auto action = CCScaleTo::create(0.5f, 0.f);
-		action = CCEaseElasticOut::create(action);
+		auto scaleAction = CCScaleTo::create(0.5f, 0.f);
+		auto action = CCEaseElasticOut::create(action);
 		infoLayer->runAction(action);
 		auto scene = CCDirector::get()->getRunningScene();
 		scene->addChild(infoLayer);
