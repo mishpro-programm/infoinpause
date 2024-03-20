@@ -39,11 +39,15 @@ class $modify(ProfilePage) {
 	void onMyLevels(CCObject* s){
 		if(!PlayLayer::get()){
 			ProfilePage::onMyLevels(s);
+		} else {
+			FLAlertLayer::create("Error", "Sorry, but now you're not able to view player levels while playing level", "OK")->show();
 		}
 	}
 	void onMyLists(CCObject* s){
 		if(!PlayLayer::get()){
 			ProfilePage::onMyLists(s);
+		} else {
+			FLAlertLayer::create("Error", "Sorry, but now you're not able to view player lists while playing level", "OK")->show();
 		}
 	}
 };
