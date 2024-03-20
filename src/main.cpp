@@ -3,6 +3,7 @@
 using namespace geode::prelude;
 
 #include <Geode/modify/PauseLayer.hpp>
+#include <Geode/modify/ProfilePage.hpp>
 class $modify(MyPauseLayer, PauseLayer) {
 	void customSetup(){
 		PauseLayer::customSetup();
@@ -27,10 +28,22 @@ class $modify(MyPauseLayer, PauseLayer) {
 		auto infoLayer = InfoLayer::create(level, nullptr, nullptr);
 		infoLayer->setZOrder(11);
 		infoLayer->setScale(0.f);
-		auto scaleAction = CCScaleTo::create(0.5f, 1.f);
+		auto scaleAction = CCScaleTo::create(1.f, 1.f);
 		auto action = CCEaseElasticOut::create(scaleAction);
 		infoLayer->runAction(action);
 		auto scene = CCDirector::get()->getRunningScene();
 		scene->addChild(infoLayer);
+	}
+};
+class $modify(ProfilePage) {
+	void onMyLevels(CCObject*){
+		if(!PlayLayer::get()){
+			ProfilePage::onMyLevels();
+		}
+	}
+	void onMyLists(CCObject*){
+		if(!PlayLayer::get()){
+			ProfilePage::onMyLists();
+		}
 	}
 };
