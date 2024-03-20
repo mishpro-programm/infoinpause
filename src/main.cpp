@@ -36,14 +36,14 @@ class $modify(MyPauseLayer, PauseLayer) {
 	}
 };
 class $modify(ProfilePage) {
-	void onMyLevels(CCObject*){
+	void onMyLevels(CCObject* s){
 		if(!PlayLayer::get()){
-			ProfilePage::onMyLevels();
+			ProfilePage::onMyLevels(s);
 		}
 	}
-	void onMyLists(CCObject*){
+	void onMyLists(CCObject* s){
 		if(!PlayLayer::get()){
-			ProfilePage::onMyLists();
+			ProfilePage::onMyLists(s);
 		}
 	}
 };
