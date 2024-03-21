@@ -48,7 +48,7 @@ class $modify(InfoLayer) {
 		}
 	}
 };
-/*class $modify(ProfilePage) {
+class $modify(ProfilePage) {
 	void onMyLevels(CCObject* s){
 		if(!PlayLayer::get()){
 			ProfilePage::onMyLevels(s);
@@ -64,4 +64,3 @@ class $modify(InfoLayer) {
 		}
 	}
 };
-*/
