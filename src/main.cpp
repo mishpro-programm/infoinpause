@@ -36,7 +36,14 @@ class $modify(MyPauseLayer, PauseLayer) {
 		scene->addChild(infoLayer);
 	}
 };
-class $modify(ProfilePage) {
+class $modify(InfoLayer) {
+	void onMore(CCObject* sender){
+		if(!PlayLayer::get()){
+			InfoLayer::onMore();
+		}
+	}
+};
+/*class $modify(ProfilePage) {
 	void onMyLevels(CCObject* s){
 		if(!PlayLayer::get()){
 			ProfilePage::onMyLevels(s);
@@ -52,3 +59,4 @@ class $modify(ProfilePage) {
 		}
 	}
 };
+*/
