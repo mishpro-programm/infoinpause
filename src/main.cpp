@@ -39,7 +39,8 @@ class $modify(MyPauseLayer, PauseLayer) {
 };
 class $modify(InfoLayer) {
 	void onMore(CCObject* sender){
-		auto infoLayer = static_cast<InfoLayer>(sender->getParent()->getParent()->getParent());
+		auto s = static_cast<CCNode>(sender);
+		auto infoLayer = static_cast<InfoLayer>(s->getParent()->getParent()->getParent());
 		if(PlayLayer::get() && infoLayer->m_level->m_accountID.value() == 0){
 			FLAlertLayer::create("Error", "Sorry, but you can't view info about green player", "OK")->show();
 		} else {
