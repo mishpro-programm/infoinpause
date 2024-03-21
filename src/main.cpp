@@ -39,7 +39,7 @@ class $modify(MyPauseLayer, PauseLayer) {
 class $modify(InfoLayer) {
 	void onMore(CCObject* sender){
 		if(!PlayLayer::get()){
-			InfoLayer::onMore();
+			InfoLayer::onMore(sender);
 		}
 	}
 };
