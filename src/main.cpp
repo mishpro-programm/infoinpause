@@ -30,7 +30,7 @@ class $modify(MyPauseLayer, PauseLayer) {
 		auto infoLayer = InfoLayer::create(level, nullptr, nullptr);
 		infoLayer->setZOrder(11);
 		infoLayer->setScale(0.f);
-		auto scaleAction = CCScaleTo::create(0.4f, 1.f);
+		auto scaleAction = CCScaleTo::create(0.1f, 1.f);
 		auto action = CCEaseOut::create(scaleAction, 2.f);
 		infoLayer->runAction(action);
 		auto scene = CCDirector::sharedDirector()->getRunningScene();
