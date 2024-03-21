@@ -49,5 +49,5 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: Build Output
+          name: mishpro.comments_in_pause_menu.geode
           path: ${{ steps.build.outputs.build-output }}
