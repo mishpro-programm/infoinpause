@@ -25,7 +25,7 @@ class $modify(MyPauseLayer, PauseLayer) {
 			return;
 		}
 		auto level = playLayer->m_level;
-		log::error("userid: {}, accountid: {}", level->m_userID, level->m_accountID);
+		log::error("userid: {}, accountid: {}", level->m_userID.value(), level->m_accountID.value());
 		auto infoLayer = InfoLayer::create(level, nullptr, nullptr);
 		infoLayer->setZOrder(11);
 		infoLayer->setScale(0.f);
