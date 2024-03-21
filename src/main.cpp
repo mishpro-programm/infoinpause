@@ -25,7 +25,7 @@ class $modify(MyPauseLayer, PauseLayer) {
 			return;
 		}
 		auto level = playLayer->m_level;
-		log::debug("level: ", level);
+		log::error("level: ", level);
 		auto infoLayer = InfoLayer::create(level, nullptr, nullptr);
 		infoLayer->setZOrder(11);
 		infoLayer->setScale(0.f);
