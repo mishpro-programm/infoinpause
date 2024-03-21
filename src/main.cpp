@@ -33,13 +33,16 @@ class $modify(MyPauseLayer, PauseLayer) {
 		auto scaleAction = CCScaleTo::create(1.f, 1.f);
 		auto action = CCEaseElasticOut::create(scaleAction);
 		infoLayer->runAction(action);
-		auto scene = CCDirector::get()->getRunningScene();
+		auto scene = CCDirector::sharedDirector()->getRunningScene();
 		scene->addChild(infoLayer);
 	}
 };
 class $modify(InfoLayer) {
 	void onMore(CCObject* sender){
-		if(!PlayLayer::get()){
+		auto infoLayer = static_cast<InfoLayer>(sender->getParent()->getParent()->getParent());
+		if(PlayLayer::get() && infoLayer->m_level->m_accountID.value() == 0){
+			FLAlertLayer::create("Error", "Sorry, but you can't view info about green player", "OK")->show();
+		} else {
 			InfoLayer::onMore(sender);
 		}
 	}
