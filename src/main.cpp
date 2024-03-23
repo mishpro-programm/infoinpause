@@ -47,6 +47,11 @@ class $modify(InfoLayer) {
 			InfoLayer::onMore(sender);
 		}
 	}
+	void onOriginal(CCObject* s){
+		if(!PlayLayer::get()){
+			InfoLayer::onOriginal(s);
+		}
+	}
 };
 class $modify(ProfilePage) {
 	void onMyLevels(CCObject* s){
