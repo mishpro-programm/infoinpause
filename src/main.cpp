@@ -3,8 +3,9 @@
 using namespace geode::prelude;
 
 #include <Geode/modify/PauseLayer.hpp>
-#include <Geode/modify/ProfilePage.hpp>
-#include <Geode/modify/InfoLayer.hpp>
+//#include <Geode/modify/ProfilePage.hpp>
+//#include <Geode/modify/InfoLayer.hpp>
+#include <Geode/modify/CCLayer.hpp>
 class $modify(MyPauseLayer, PauseLayer) {
 	void customSetup(){
 		PauseLayer::customSetup();
@@ -37,7 +38,16 @@ class $modify(MyPauseLayer, PauseLayer) {
 		scene->addChild(infoLayer);
 	}
 };
-class $modify(InfoLayer) {
+#ifndef GEODE_IS_WINDOWS
+class $modify(CCLayer){
+	void onEnter(){
+		if(reinterpret_cast<void*>(PlayLayer::get()) != reinterpret_cast<void*>(this)){
+			CCLayer::onEnter();
+		}
+	}
+};
+#endif
+/*class $modify(InfoLayer) {
 	void onMore(CCObject* sender){
 		auto s = static_cast<CCNode*>(sender);
 		auto infoLayer = static_cast<InfoLayer*>(s->getParent()->getParent()->getParent());
@@ -69,3 +79,4 @@ class $modify(ProfilePage) {
 		}
 	}
 };
+*/
