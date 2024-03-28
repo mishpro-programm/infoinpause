@@ -54,20 +54,34 @@ class $modify(MyPauseLayer, PauseLayer) {
 	}
 };
 class $modify(FixedPlayLayer, PlayLayer) {
-	bool isPaused(){
-		CCDirector::sharedDirector()->getRunningScene()->getChildByID("PauseLayer") != nullptr;
+	bool isCurrentPlayLayer(){
+		auto playLayer = geode::cocos::getChildOfType<PlayLayer>(cocos2d::CCScene::get(), 0);
+		return playLayer == this;
+	}
+	bool isPaused(bool checkCurrent){
+		if(checkCurrent && !isCurrentPlayLayer()) return false;
+
+		for(CCNode* child : CCArrayExt<CCNode*>(this->getParent()->getChildren())) {
+			if(typeinfo_cast<PauseLayer*>(child)) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 	void onEnterH(){
-		auto sc = this->getParent() == CCScene::get();
-		if(sc){
+		auto weRunningScene = this->getParent() == CCScene::get();
+
+		if(weRunningScene){
 			CCLayer::onEnter();
 			return;
 		}
+
 		Loader::get()->queueInMainThread([self = Ref(this)] {
-			if(!self->isPaused()){
-				self->CCLayer::onEnter();
-			}
-		});
+		        if (!self->isPaused(false)) {
+		            self->CCLayer::onEnter();
+		        }
+		    });
 	}
 };
 #ifndef GEODE_IS_WINDOWS
@@ -78,14 +92,6 @@ class $modify(MyCCLayer, CCLayer){
 				pl->onEnterH();
 		} else {
 			CCLayer::onEnter();
-		}
-	}
-	void onExit(){
-		bool isPauseLayer = this->getID() == "PauseLayer" || typeinfo_cast<PauseLayer*>(this) != nullptr;
-		if(isPauseLayer){
-			static_cast<MyPauseLayer*>(static_cast<CCLayer*>(this))->onExitH();
-		} else {
-			CCLayer::onExit();
 		}
 	}
 };
