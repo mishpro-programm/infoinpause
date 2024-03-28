@@ -74,7 +74,7 @@ class $modify(FixedPlayLayer, PlayLayer) {
 class $modify(MyCCLayer, CCLayer){
 	void onEnter(){
 		if(reinterpret_cast<void*>(PlayLayer::get()) == reinterpret_cast<void*>(this)){
-				auto pl = reinterpret_cast<FixedPlayLayer*>(static_cast<CCLayer*>(self));
+				auto pl = reinterpret_cast<FixedPlayLayer*>(static_cast<CCLayer*>(this));
 				pl->onEnterH();
 		} else {
 			CCLayer::onEnter();
