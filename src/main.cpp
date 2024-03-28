@@ -74,19 +74,17 @@ class $modify(FixedPlayLayer, PlayLayer) {
 class $modify(CCLayer){
 	void onEnter(){
 		if(reinterpret_cast<void*>(PlayLayer::get()) == reinterpret_cast<void*>(this)){
-			auto pl = reinterpret_cast<FixedPlayLayer*>(static_cast<CCLayer*>(this));
-			bool _isPaused;
-			Loader::get()->queueInMainThread([pl, _isPaused] {
-				_isPaused = pl->isPaused();
-			});
-			if(_isPaused){
-				pl->onEnterH();
+			Loader::get()->queueInMainThread([self = Ref(this)] {
+				auto pl = reinterpret_cast<FixedPlayLayer*>(static_cast<CCLayer*>(self));
+				if(pl->isPaused()){
+					pl->onEnterH();
+				} else {
+					CCLayer::onEnter();
+				}
 			} else {
 				CCLayer::onEnter();
 			}
-		} else {
-			CCLayer::onEnter();
-		}
+		});
 	}
 	void onExit(){
 		bool isPauseLayer = this->getID() == "PauseLayer" || typeinfo_cast<PauseLayer*>(this) != nullptr;
