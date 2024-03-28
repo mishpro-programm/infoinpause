@@ -71,7 +71,7 @@ class $modify(FixedPlayLayer, PlayLayer) {
 	}
 };
 #ifndef GEODE_IS_WINDOWS
-class $modify(CCLayer){
+class $modify(MyCCLayer, CCLayer){
 	void onEnter(){
 		if(reinterpret_cast<void*>(PlayLayer::get()) == reinterpret_cast<void*>(this)){
 			Loader::get()->queueInMainThread([self = Ref(this)] {
