@@ -67,7 +67,7 @@ class $modify(FixedPlayLayer, PlayLayer) {
 			if(!self->isPaused()){
 				self->CCLayer::onEnter();
 			}
-		})
+		});
 	}
 };
 #ifndef GEODE_IS_WINDOWS
