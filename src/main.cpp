@@ -74,14 +74,8 @@ class $modify(FixedPlayLayer, PlayLayer) {
 class $modify(MyCCLayer, CCLayer){
 	void onEnter(){
 		if(reinterpret_cast<void*>(PlayLayer::get()) == reinterpret_cast<void*>(this)){
-			Loader::get()->queueInMainThread([self = Ref(this)] {
 				auto pl = reinterpret_cast<FixedPlayLayer*>(static_cast<CCLayer*>(self));
-				if(pl->isPaused()){
-					pl->onEnterH();
-				} else {
-					self->CCLayer::onEnter();
-				}
-			});
+				pl->onEnterH();
 		} else {
 			CCLayer::onEnter();
 		}
