@@ -54,7 +54,7 @@ class $modify(MyPauseLayer, PauseLayer) {
 	}
 };
 class $modify(FixedPlayLayer, PlayLayer) {
-	void isPaused(){
+	bool isPaused(){
 		return CCDirector::sharedDirector()->getRunningScene()->getChildByID("PauseLayer") != nullptr;
 	}
 	void onEnterH(){
