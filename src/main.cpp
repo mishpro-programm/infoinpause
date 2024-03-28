@@ -27,10 +27,12 @@ class $modify(MyPauseLayer, PauseLayer) {
 		auto level = playLayer->m_level;
 		auto infoLayer = InfoLayer::create(level, nullptr, nullptr);
 		infoLayer->setZOrder(11);
+#ifndef GEODE_IS_MACOS
 		infoLayer->setScale(0.f);
 		auto scaleAction = CCScaleTo::create(0.3f, 1.f);
 		auto action = CCEaseBackOut::create(scaleAction);
 		infoLayer->runAction(action);
+#endif
 		auto scene = CCDirector::sharedDirector()->getRunningScene();
 		scene->addChild(infoLayer);
 	}
