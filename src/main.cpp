@@ -42,8 +42,8 @@ class $modify(MyPauseLayer, PauseLayer) {
 class $modify(CCLayer){
 	void onEnter(){
 		if(reinterpret_cast<void*>(PlayLayer::get()) == reinterpret_cast<void*>(this)){
-			auto pl = PlayLayer::get();
-			if(pl->getChildByID("PauseLayer")){
+			auto scene = CCDirector::sharedDirector()->getRunningScene();
+			if(scene->getChildByID("PauseLayer")){
 				//do nothing
 			} else {
 				CCLayer::onEnter();
