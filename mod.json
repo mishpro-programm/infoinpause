@@ -3,9 +3,10 @@
 	"gd": {
 		"android": "2.205",
 		"win": "2.204",
-		"ios": "2.205"
+		"ios": "2.205",
+		"mac": "2.200"
 	},
-	"version": "v1.0.2",
+	"version": "v1.1.0",
 	"id": "mishpro.comments_in_pause_menu",
 	"name": "Comments in Pause menu",
 	"developer": "mishpro",
