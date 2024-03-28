@@ -79,10 +79,10 @@ class $modify(CCLayer){
 				if(pl->isPaused()){
 					pl->onEnterH();
 				} else {
-					CCLayer::onEnter();
+					self->CCLayer::onEnter();
 				}
 			} else {
-				CCLayer::onEnter();
+				self->CCLayer::onEnter();
 			}
 		});
 	}
