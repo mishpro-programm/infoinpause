@@ -81,10 +81,10 @@ class $modify(CCLayer){
 				} else {
 					self->CCLayer::onEnter();
 				}
-			} else {
-				self->CCLayer::onEnter();
-			}
-		});
+			});
+		} else {
+			CCLayer::onEnter();
+		}
 	}
 	void onExit(){
 		bool isPauseLayer = this->getID() == "PauseLayer" || typeinfo_cast<PauseLayer*>(this) != nullptr;
