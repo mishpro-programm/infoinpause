@@ -55,7 +55,7 @@ class $modify(MyPauseLayer, PauseLayer) {
 };
 class $modify(FixedPlayLayer, PlayLayer) {
 	bool isPaused(){
-		return CCDirector::sharedDirector()->getRunningScene()->getChildByID("PauseLayer") != nullptr;
+		CCDirector::sharedDirector()->getRunningScene()->getChildByID("PauseLayer") != nullptr;
 	}
 	void onEnterH(){
 		auto sc = this->getParent() == CCScene::get();
@@ -75,7 +75,11 @@ class $modify(CCLayer){
 	void onEnter(){
 		if(reinterpret_cast<void*>(PlayLayer::get()) == reinterpret_cast<void*>(this)){
 			auto pl = reinterpret_cast<FixedPlayLayer*>(static_cast<CCLayer*>(this));
-			if(pl->isPaused()){
+			bool _isPaused;
+			Loader::get()->queueInMainThread([pl, _isPaused] {
+				_isPaused = pl->isPaused();
+			});
+			if(_isPaused){
 				pl->onEnterH();
 			} else {
 				CCLayer::onEnter();
