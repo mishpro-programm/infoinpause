@@ -3,6 +3,7 @@
 using namespace geode::prelude;
 
 #include <Geode/modify/PauseLayer.hpp>
+#include <Geode/modify/PlayLayer.hpp>
 //#include <Geode/modify/ProfilePage.hpp>
 //#include <Geode/modify/InfoLayer.hpp>
 #include <Geode/modify/CCLayer.hpp>
@@ -37,19 +38,58 @@ class $modify(MyPauseLayer, PauseLayer) {
 		auto scene = CCDirector::sharedDirector()->getRunningScene();
 		scene->addChild(infoLayer);
 	}
+	void onExitH(){
+		auto* arr = this->getParent()->getChildren();
+		for(size_t i = arr->count(); i>0; i--){
+			auto* obj = arr->objectAtIndex(i-1);
+			if(auto* alert = typeinfo_cast<FLAlertLayer*>(obj)){
+				alert->retain();
+				alert->keyBackClicked();
+				Loader::get()->queueInMainThread([alert] {
+					alert->release();
+				});
+			}
+		}
+		PauseLayer::onExit();
+	}
+};
+class $modify(FixedPlayLayer, PlayLayer) {
+	void isPaused(){
+		return CCDirector::sharedDirector()->getRunningScene()->getChildByID("PauseLayer") != nullptr;
+	}
+	void onEnterH(){
+		auto sc = this->getParent() == CCScene::get();
+		if(sc){
+			CCLayer::onEnter();
+			return;
+		}
+		Loader::get()->queueInMainThread([self = Ref(this)] {
+			if(!self->isPaused()){
+				self->CCLayer::onEnter();
+			}
+		})
+	}
 };
 #ifndef GEODE_IS_WINDOWS
 class $modify(CCLayer){
 	void onEnter(){
 		if(reinterpret_cast<void*>(PlayLayer::get()) == reinterpret_cast<void*>(this)){
-			auto scene = CCDirector::sharedDirector()->getRunningScene();
-			if(scene->getChildByID("PauseLayer")){
-				//do nothing
+			auto pl* = reinterpret_cast<FixedPlayLayer*>(static_cast<CCLayer*>(this));
+			if(pl->isPaused()){
+				pl->onEnterH();
 			} else {
 				CCLayer::onEnter();
 			}
 		} else {
 			CCLayer::onEnter();
+		}
+	}
+	void onExit(){
+		bool isPauseLayer = this->getID() == "PauseLayer" || typeinfo_cast<PauseLayer*>(this) != nullptr;
+		if(isPauseLayer){
+			static_cast<MyPauseLayer*>(static_cast<CCLayer*>(this))->onExitH();
+		} else {
+			CCLayer::onExit();
 		}
 	}
 };
