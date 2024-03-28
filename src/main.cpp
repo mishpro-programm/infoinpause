@@ -41,7 +41,14 @@ class $modify(MyPauseLayer, PauseLayer) {
 #ifndef GEODE_IS_WINDOWS
 class $modify(CCLayer){
 	void onEnter(){
-		if(reinterpret_cast<void*>(PlayLayer::get()) != reinterpret_cast<void*>(this)){
+		if(reinterpret_cast<void*>(PlayLayer::get()) == reinterpret_cast<void*>(this)){
+			auto pl = PlayLayer::get();
+			if(pl->getChildByID("PauseLayer")){
+				//do nothing
+			} else {
+				CCLayer::onEnter();
+			}
+		} else {
 			CCLayer::onEnter();
 		}
 	}
