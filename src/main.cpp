@@ -92,6 +92,6 @@ class $modify(LevelInfoLayer) {
 			FLAlertLayer::create("Error", "Can't clone level while already in another level", "OK")->show();
 			return;
 		}
-		LevelInfoLayer:tryCloneLevel(s);
+		LevelInfoLayer::tryCloneLevel(s);
 	}
 };
