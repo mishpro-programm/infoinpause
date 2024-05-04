@@ -37,6 +37,7 @@ jobs:
         with:
           combine: true
           target: ${{ matrix.config.target }}
+          build-config: 'RelWithDebInfo'
 
   package:
     name: Package builds
