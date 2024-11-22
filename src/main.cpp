@@ -40,7 +40,7 @@ class $modify(MyPauseLayer, PauseLayer) {
 //i copied this code from globed (tysm dankmeme)
 class $modify(FixedPlayLayer, PlayLayer) {
 	bool isCurrentPlayLayer(){
-		auto playLayer = geode::cocos::getChildOfType<PlayLayer>(cocos2d::CCScene::get(), 0);
+		auto playLayer = cocos2d::CCScene::get()->getChildByType<PlayLayer>(0);
 		return playLayer == this;
 	}
 	bool isPaused(bool checkCurrent){
