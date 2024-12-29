@@ -4,3 +4,4 @@ Adds a button that allows you to view comments on a level without leaving it (wo
 You can use this mod as text chat for globed
 # Credits
  • [dankmeme](https://github.com/dankmeme01)
+ • [RayDeeUx](https://github.com/RayDeeUx)
