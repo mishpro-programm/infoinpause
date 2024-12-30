@@ -1,5 +1,7 @@
 #include <Geode/modify/PauseLayer.hpp>
 #include <Geode/modify/LevelInfoLayer.hpp>
+#include <Geode/modify/CCLayer.hpp>
+#include <Geode/modify/PlayLayer.hpp>
 
 using namespace geode::prelude;
 
