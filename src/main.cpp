@@ -40,3 +40,44 @@ class $modify(LevelInfoLayer) {
 		LevelInfoLayer::tryCloneLevel(s);
 	}
 };
+class $modify(FixedPlayLayer, PlayLayer) {
+	bool isCurrentPlayLayer(){
+		auto playLayer = cocos2d::CCScene::get()->getChildByType<PlayLayer>(0);
+		return playLayer == this;
+	}
+	bool isPaused(bool checkCurrent){
+		if(checkCurrent && !isCurrentPlayLayer()) return false;
+
+		for(CCNode* child : CCArrayExt<CCNode*>(this->getParent()->getChildren())) {
+			if(typeinfo_cast<PauseLayer*>(child)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+	void onEnterH(){
+		auto weRunningScene = this->getParent() == CCScene::get();
+
+		if(weRunningScene){
+			CCLayer::onEnter();
+			return;
+		}
+
+		Loader::get()->queueInMainThread([self = Ref(this)] {
+		        if (!self->isPaused(false)) {
+		            self->CCLayer::onEnter();
+		        }
+		    });
+	}
+};
+class $modify(MyCCLayer, CCLayer){
+	void onEnter(){
+		if(reinterpret_cast<void*>(PlayLayer::get()) == reinterpret_cast<void*>(this)){
+				auto pl = reinterpret_cast<FixedPlayLayer*>(static_cast<CCLayer*>(this));
+				pl->onEnterH();
+		} else {
+			CCLayer::onEnter();
+		}
+	}
+};
