@@ -5,4 +5,4 @@ You can use this mod as text chat for globed
 # Credits
  • [dankmeme](https://github.com/dankmeme01)
  • [RayDeeUx](https://github.com/RayDeeUx)
- • [hiimjustin000](https://github.com/hiimjasmine00)
+ • [hiimjasmine00](https://github.com/hiimjasmine00)
